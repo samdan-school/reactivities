@@ -1,19 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import logo from './logo.svg';
+import 'antd/dist/antd.css';
 import './App.css';
 
+import { PageHeader, List } from 'antd';
+
 function App() {
+	const [ values, setValues ] = useState([ { id: 1, name: 'Value 101' }, { id: 2, name: 'Value 102' } ]);
+
+	useEffect(() => {
+		axios.get('https://localhost:5001/api/values').then((res) => {
+			setValues(res.data);
+		});
+	}, []);
+
 	return (
 		<div className="App">
-			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
-				<p>
-					Edit <code>src/App.tsx</code> and save to reload.
-				</p>
-				<a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-					Learn React
-				</a>
-			</header>
+			<PageHeader title="Reactivity" avatar={{ src: logo }}>
+				<List bordered dataSource={values} renderItem={(v) => <List.Item>{v.name}</List.Item>} />
+			</PageHeader>
 		</div>
 	);
 }
