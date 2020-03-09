@@ -4,3 +4,4 @@ obj
 .DB_Store
 appsettings.json
 *.db
+.idea
