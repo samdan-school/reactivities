@@ -7,9 +7,10 @@ interface IProps {
   activities: IActivity[],
   selectActivity: (id: string) => void;
   setEditMode: (editMode: boolean) => void;
+  deleteActivity: (id: string) => void;
 }
 
-const ActivityList: React.FC<IProps> = ({activities, selectActivity, setEditMode}) => {
+const ActivityList: React.FC<IProps> = ({activities, selectActivity, setEditMode, deleteActivity}) => {
   return (
     <div>
       {activities.map(activity => (
@@ -21,10 +22,20 @@ const ActivityList: React.FC<IProps> = ({activities, selectActivity, setEditMode
           <div style={{marginTop: 15}}>{activity.description}</div>
           <div>{activity.city}</div>
           <Tag style={{marginTop: 10, padding: 5}}>{activity.category}</Tag>
-          <Button style={{float: "right"}} onClick={() => {
-            selectActivity(activity.id);
-            setEditMode(false);
-          }}>View</Button>
+          <Button
+            type='primary'
+            style={{float: "right", marginLeft: 15}}
+            onClick={() => {
+              selectActivity(activity.id);
+              setEditMode(false);
+            }}>
+            View
+          </Button>
+          <Button
+            style={{float: "right"}}
+            type='danger'
+            onClick={() => deleteActivity(activity.id)}>
+            Delete</Button>
         </Card>
       ))}
     </div>

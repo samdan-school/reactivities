@@ -21,8 +21,24 @@ const App = () => {
   };
 
   const onCreateForm = () => {
-    handleSelectActivity('0');
+    setSelectedActivity(undefined);
     setEditMode(true);
+  };
+
+  const handleCreateActivity = (activity: IActivity) => {
+    setActivities([activity, ...activities]);
+    setSelectedActivity(activity);
+    setEditMode(false);
+  };
+
+  const handleEditActivity = (activity: IActivity) => {
+    setActivities(activities.map(a => a.id === activity.id ? activity : a));
+    setSelectedActivity(activity);
+    setEditMode(false);
+  };
+
+  const handleDeleteActivity = (id: string) => {
+    setActivities(activities.filter(a => a.id !== id));
   };
 
   useEffect(() => {
@@ -44,17 +60,25 @@ const App = () => {
               selectActivity={handleSelectActivity}
               activities={activities}
               editMode={editMode}
-              setEditMode={setEditMode}/>
+              setEditMode={setEditMode}
+              deleteActivity={handleDeleteActivity}/>
           </Col>
           <Col
             span={8}
             style={{marginTop: 60}}>
-            {selectedActivity && !editMode &&
-            <ActivityDetails
-              activity={selectedActivity}
-              selectActivity={handleSelectActivity}
-              setEditMode={setEditMode}/>}
-            {editMode && <ActivityForm setEditMode={setEditMode} activity={selectedActivity}/>}
+            <div style={{position: 'fixed', width: '500px'}}>
+              {selectedActivity && !editMode &&
+              <ActivityDetails
+                activity={selectedActivity}
+                selectActivity={handleSelectActivity}
+                setEditMode={setEditMode}/>}
+              {editMode &&
+              <ActivityForm
+                setEditMode={setEditMode}
+                activity={selectedActivity}
+                createActivity={handleCreateActivity}
+                editActivity={handleEditActivity}/>}
+            </div>
           </Col>
         </Row>
       </Layout>
