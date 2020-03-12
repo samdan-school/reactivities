@@ -1,18 +1,20 @@
 ﻿import React from 'react';
-import {List, PageHeader} from "antd";
+import {PageHeader} from "antd";
 import {IActivity} from "app/models/activity";
+import ActivityList from "feature/activities/dashboard/ActivityList";
 
 interface IProps {
-  activities: IActivity[]
+  activities: IActivity[];
+  selectActivity: (id: string) => void;
+  editMode: boolean;
+  setEditMode: (editMode: boolean) => void;
 }
 
-const ActivityDashboard: React.FC<IProps> = ({activities}) => {
+const ActivityDashboard: React.FC<IProps> = ({activities, selectActivity, setEditMode}) => {
   return (
-    <div>
-      <PageHeader title="Reactivity" className={'context'}>
-        <List bordered dataSource={activities} renderItem={(v) => <List.Item>{v.title}</List.Item>}/>
-      </PageHeader>
-    </div>
+    <PageHeader title="Reactivity" className={'context'}>
+      <ActivityList selectActivity={selectActivity} setEditMode={setEditMode} activities={activities}/>
+    </PageHeader>
   );
 };
 

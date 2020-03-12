@@ -50,6 +50,9 @@
     <Content Include="src\app\layout\App.tsx" />
     <Content Include="src\app\layout\style.css" />
     <Content Include="src\feature\activities\dashboard\ActivityDashboard.tsx" />
+    <Content Include="src\feature\activities\dashboard\ActivityList.tsx" />
+    <Content Include="src\feature\activities\Details\ActivityDetails.tsx" />
+    <Content Include="src\feature\activities\Form\ActivityForm.tsx" />
     <Content Include="src\feature\nav\NavBar.tsx" />
     <Content Include="tsconfig.json" />
     <Content Include="package.json" />

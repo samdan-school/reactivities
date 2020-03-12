@@ -4,16 +4,20 @@ import {
   AppstoreOutlined
 } from '@ant-design/icons';
 
-const NavBar = () => {
+interface IProps {
+  onCreateForm: () => void;
+}
+
+const NavBar: React.FC<IProps> = ({onCreateForm}) => {
   return (
     <Menu mode='horizontal'>
       <Menu.Item key="mail">
-        <AppstoreOutlined />
+        <AppstoreOutlined/>
         Reactivities
       </Menu.Item>
       <Menu.Item key="activities">Activities</Menu.Item>
       <Menu.Item key="new-activities">
-        <Button type='primary'>Create Activity</Button>
+        <Button onClick={() => onCreateForm()} type='primary'> Create Activity </Button>
       </Menu.Item>
     </Menu>
   );
