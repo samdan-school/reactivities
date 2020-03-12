@@ -4,13 +4,15 @@ import Meta from "antd/es/card/Meta";
 import {IActivity} from "app/models/activity";
 
 interface IProps {
+  submitting: boolean;
   activities: IActivity[],
   selectActivity: (id: string) => void;
   setEditMode: (editMode: boolean) => void;
   deleteActivity: (id: string) => void;
+  target: string;
 }
 
-const ActivityList: React.FC<IProps> = ({activities, selectActivity, setEditMode, deleteActivity}) => {
+const ActivityList: React.FC<IProps> = ({submitting, activities, selectActivity, setEditMode, deleteActivity, target}) => {
   return (
     <div>
       {activities.map(activity => (
@@ -34,8 +36,10 @@ const ActivityList: React.FC<IProps> = ({activities, selectActivity, setEditMode
           <Button
             style={{float: "right"}}
             type='danger'
+            loading={activity.id === target && submitting}
             onClick={() => deleteActivity(activity.id)}>
-            Delete</Button>
+            Delete
+          </Button>
         </Card>
       ))}
     </div>

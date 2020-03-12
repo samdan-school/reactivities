@@ -47,7 +47,9 @@
     <Content Include="public\logo512.png" />
     <Content Include="public\manifest.json" />
     <Content Include="public\robots.txt" />
+    <Content Include="src\app\api\agent.ts" />
     <Content Include="src\app\layout\App.tsx" />
+    <Content Include="src\app\layout\LoadingCmp.tsx" />
     <Content Include="src\app\layout\style.css" />
     <Content Include="src\feature\activities\dashboard\ActivityDashboard.tsx" />
     <Content Include="src\feature\activities\dashboard\ActivityList.tsx" />

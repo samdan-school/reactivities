@@ -4,17 +4,25 @@ import {IActivity} from "app/models/activity";
 import ActivityList from "feature/activities/dashboard/ActivityList";
 
 interface IProps {
+  submitting: boolean;
   activities: IActivity[];
   selectActivity: (id: string) => void;
   editMode: boolean;
   setEditMode: (editMode: boolean) => void;
   deleteActivity: (id: string) => void;
+  target: string;
 }
 
-const ActivityDashboard: React.FC<IProps> = ({activities, selectActivity, setEditMode, deleteActivity}) => {
+const ActivityDashboard: React.FC<IProps> = ({submitting, activities, selectActivity, setEditMode, deleteActivity, target}) => {
   return (
     <PageHeader title="Reactivity" className={'context'}>
-      <ActivityList selectActivity={selectActivity} setEditMode={setEditMode} activities={activities} deleteActivity={deleteActivity}/>
+      <ActivityList
+        submitting={submitting}
+        selectActivity={selectActivity}
+        setEditMode={setEditMode}
+        activities={activities}
+        deleteActivity={deleteActivity}
+        target={target}/>
     </PageHeader>
   );
 };

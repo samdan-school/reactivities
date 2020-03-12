@@ -8,13 +8,14 @@ const {Item} = Form;
 const {TextArea} = Input;
 
 interface IProps {
+  submitting: boolean;
   activity: IActivity | undefined;
   setEditMode: (editMode: boolean) => void;
   createActivity: (activity: IActivity) => void;
   editActivity: (activity: IActivity) => void;
 }
 
-const ActivityForm: React.FC<IProps> = ({setEditMode, activity, createActivity, editActivity}) => {
+const ActivityForm: React.FC<IProps> = ({submitting, setEditMode, activity, createActivity, editActivity}) => {
   const [form] = Form.useForm();
   useEffect(() => {
     form.resetFields();
@@ -60,7 +61,7 @@ const ActivityForm: React.FC<IProps> = ({setEditMode, activity, createActivity, 
           <Input placeholder='Venue'/>
         </Item>
         <Item>
-          <Button type="primary" htmlType="submit">Submit</Button>
+          <Button loading={submitting} type="primary" htmlType="submit">Submit</Button>
           <Button type="danger" htmlType="submit" onClick={() => setEditMode(false)}>Cancel</Button>
         </Item>
       </Form>
