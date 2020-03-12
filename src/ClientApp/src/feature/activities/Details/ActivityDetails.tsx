@@ -1,17 +1,14 @@
-﻿import React from 'react';
+﻿import React, {useContext} from 'react';
 import {Button, Card} from "antd"
-import {EditOutlined, CloseOutlined} from '@ant-design/icons';
-import {IActivity} from "app/models/activity";
+import {CloseOutlined, EditOutlined} from '@ant-design/icons';
+import ActivityStore from "app/stores/activityStore";
+import {observer} from "mobx-react-lite";
 
 const {Meta} = Card;
 
-interface IProps {
-  activity: IActivity | undefined;
-  selectActivity: (id: string) => void;
-  setEditMode: (editMode: boolean) => void;
-}
-
-const ActivityDetails: React.FC<IProps> = ({activity, setEditMode, selectActivity}) => {
+const ActivityDetails: React.FC = () => {
+  const activityStore = useContext(ActivityStore);
+  const {selectedActivity: activity, cancelSelectedActivity, openEditForm} = activityStore;
   return (
     <Card
       cover={
@@ -22,14 +19,14 @@ const ActivityDetails: React.FC<IProps> = ({activity, setEditMode, selectActivit
       actions={[
         <Button
           type='primary'
-          style={{width: '100%'}} onClick={() => setEditMode(true)}
+          style={{width: '100%'}} onClick={() => openEditForm(activity!.id)}
           icon={<EditOutlined key="edit"/>}>
           Edit
         </Button>,
         <Button
           style={{width: '100%'}}
           icon={<CloseOutlined key='cancel'/>}
-          onClick={() => selectActivity('0')}>
+          onClick={cancelSelectedActivity}>
           Cancel
         </Button>
       ]}>
@@ -41,4 +38,4 @@ const ActivityDetails: React.FC<IProps> = ({activity, setEditMode, selectActivit
   );
 };
 
-export default ActivityDetails;
+export default observer(ActivityDetails);

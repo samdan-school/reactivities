@@ -1,21 +1,23 @@
-﻿import React, {useEffect} from 'react';
-import {Form, Input, DatePicker, Button} from "antd";
+﻿import React, {useContext, useEffect} from 'react';
+import {Button, DatePicker, Form, Input} from "antd";
 import Moment from 'moment';
 import {v4 as uuid} from 'uuid';
-import {IActivity} from "app/models/activity";
+import {observer} from "mobx-react-lite";
+import ActivityStore from "app/stores/activityStore";
 
 const {Item} = Form;
 const {TextArea} = Input;
 
-interface IProps {
-  submitting: boolean;
-  activity: IActivity | undefined;
-  setEditMode: (editMode: boolean) => void;
-  createActivity: (activity: IActivity) => void;
-  editActivity: (activity: IActivity) => void;
-}
+const ActivityForm: React.FC = () => {
+  const activityStore = useContext(ActivityStore);
+  const {
+    selectedActivity: activity,
+    submitting,
+    createActivity,
+    editActivity,
+    cancelFormOpen
+  } = activityStore;
 
-const ActivityForm: React.FC<IProps> = ({submitting, setEditMode, activity, createActivity, editActivity}) => {
   const [form] = Form.useForm();
   useEffect(() => {
     form.resetFields();
@@ -27,7 +29,6 @@ const ActivityForm: React.FC<IProps> = ({submitting, setEditMode, activity, crea
       date: values.date.format()
     };
     if (activity) {
-      console.log(values);
       editActivity({id: activity.id, ...values});
     } else {
       createActivity({id: uuid(), ...values});
@@ -62,11 +63,11 @@ const ActivityForm: React.FC<IProps> = ({submitting, setEditMode, activity, crea
         </Item>
         <Item>
           <Button loading={submitting} type="primary" htmlType="submit">Submit</Button>
-          <Button type="danger" htmlType="submit" onClick={() => setEditMode(false)}>Cancel</Button>
+          <Button type="danger" htmlType="submit" onClick={cancelFormOpen}>Cancel</Button>
         </Item>
       </Form>
     </div>
   );
 };
 
-export default ActivityForm;
+export default observer(ActivityForm);

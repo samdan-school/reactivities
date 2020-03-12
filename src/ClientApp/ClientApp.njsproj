@@ -51,6 +51,7 @@
     <Content Include="src\app\layout\App.tsx" />
     <Content Include="src\app\layout\LoadingCmp.tsx" />
     <Content Include="src\app\layout\style.css" />
+    <Content Include="src\app\stores\activityStore.ts" />
     <Content Include="src\feature\activities\dashboard\ActivityDashboard.tsx" />
     <Content Include="src\feature\activities\dashboard\ActivityList.tsx" />
     <Content Include="src\feature\activities\Details\ActivityDetails.tsx" />
