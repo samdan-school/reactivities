@@ -1,30 +1,34 @@
-﻿import React, {useContext} from 'react';
+﻿import React, {useContext, useEffect} from 'react';
 import {Col, PageHeader, Row} from "antd";
 import ActivityList from "feature/activities/dashboard/ActivityList";
-import ActivityDetails from "feature/activities/Details/ActivityDetails";
-import ActivityForm from "feature/activities/Form/ActivityForm";
 import {observer} from "mobx-react-lite";
 import ActivityStore from "app/stores/activityStore";
+import {RouteComponentProps} from "@reach/router";
+import LoadingCmp from "app/layout/LoadingCmp";
 
-const ActivityDashboard: React.FC = () => {
+interface IProps extends RouteComponentProps {
+  id?: string;
+}
+
+const ActivityDashboard: React.FC<IProps> = () => {
   const activityStore = useContext(ActivityStore);
-  const {
-    selectedActivity,
-    editMode,
-  } = activityStore;
+  const {loadActivities, loadingInitial} = activityStore;
+
+  useEffect(() => {
+    loadActivities()
+  }, [loadActivities]);
+
+  if (loadingInitial) return <LoadingCmp tip='Loading Activities...'/>;
 
   return (
     <Row className="content">
       <Col span={16}>
         <PageHeader title="Reactivity" className={'context'}>
-          <ActivityList />
+          <ActivityList/>
         </PageHeader>
       </Col>
       <Col span={8} style={{marginTop: 60}}>
-        <div style={{position: 'fixed', width: '500px'}}>
-          {selectedActivity && !editMode && <ActivityDetails/>}
-          {editMode && <ActivityForm/>}
-        </div>
+        <h2>Activity filter</h2>
       </Col>
     </Row>
   );

@@ -37,6 +37,32 @@ class ActivityStore {
     }
   };
 
+  @action loadActivity = async (id: string) => {
+    this.loadingInitial = true;
+    let activity = this.getActivity(id);
+    if (activity) {
+      this.selectedActivity = activity;
+      this.loadingInitial = false;
+    } else {
+      try {
+        activity = await agent.Activities.details(id);
+        runInAction('getting activity', () => {
+          this.loadingInitial = false;
+          this.selectedActivity = activity;
+        });
+      } catch (e) {
+        console.log(e);
+        runInAction('get activity error', () => {
+          this.loadingInitial = false;
+        });
+      }
+    }
+  };
+
+  getActivity = (id: string) => {
+    return this.activityRegistry.get(id);
+  };
+
   @action createActivity = async (activity: IActivity) => {
     this.submitting = true;
     try {

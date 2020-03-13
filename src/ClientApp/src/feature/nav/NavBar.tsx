@@ -1,21 +1,27 @@
-﻿import React, {useContext} from 'react';
+﻿import React from 'react';
 import {Button, Menu} from "antd";
 import {AppstoreOutlined} from '@ant-design/icons';
 import {observer} from "mobx-react-lite";
-import ActivityStore from "app/stores/activityStore";
+import {Link} from "@reach/router";
 
 const NavBar: React.FC = () => {
-  const activityStore = useContext(ActivityStore);
-  const {openCrateForm} = activityStore;
   return (
     <Menu mode='horizontal'>
-      <Menu.Item key="mail">
-        <AppstoreOutlined/>
-        Reactivities
+      <Menu.Item key="home">
+        <Link to='/'>
+          <AppstoreOutlined/>
+          Reactivities
+        </Link>
       </Menu.Item>
-      <Menu.Item key="activities">Activities</Menu.Item>
+      <Menu.Item key="activities">
+        <Link to='/activities'>
+          Activities
+        </Link>
+      </Menu.Item>
       <Menu.Item key="new-activities">
-        <Button onClick={() => openCrateForm()} type='primary'> Create Activity </Button>
+        <Link to='createActivity'>
+          <Button>Create Activity</Button>
+        </Link>
       </Menu.Item>
     </Menu>
   );

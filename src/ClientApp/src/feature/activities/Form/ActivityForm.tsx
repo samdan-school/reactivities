@@ -4,35 +4,44 @@ import Moment from 'moment';
 import {v4 as uuid} from 'uuid';
 import {observer} from "mobx-react-lite";
 import ActivityStore from "app/stores/activityStore";
+import {navigate, RouteComponentProps} from "@reach/router";
 
 const {Item} = Form;
 const {TextArea} = Input;
 
-const ActivityForm: React.FC = () => {
+interface IProps extends RouteComponentProps {
+  id?: string;
+}
+
+const ActivityForm: React.FC<IProps> = ({id}) => {
   const activityStore = useContext(ActivityStore);
   const {
     selectedActivity: activity,
     submitting,
     createActivity,
     editActivity,
-    cancelFormOpen
+    cancelFormOpen,
+    selectActivity
   } = activityStore;
 
   const [form] = Form.useForm();
   useEffect(() => {
+    if (!id) selectActivity('');
     form.resetFields();
-  }, [activity, form]);
+  }, [selectActivity, activity, form, id]);
 
-  const onFinish = (values: any) => {
+  const onFinish = async (values: any) => {
     values = {
       ...values,
       date: values.date.format()
     };
     if (activity) {
-      editActivity({id: activity.id, ...values});
+      await editActivity({id, ...values});
     } else {
-      createActivity({id: uuid(), ...values});
+      id = uuid();
+      await createActivity({id, ...values});
     }
+    navigate(`/activities/${id}`);
   };
   return (
     <div style={{padding: 15, marginTop: 20, backgroundColor: 'white'}}>
