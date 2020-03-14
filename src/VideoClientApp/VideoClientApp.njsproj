@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <SchemaVersion>2.0</SchemaVersion>
+        <ProjectGuid>{cb8f537f-9bd9-4ad0-8f62-e447fa693780}</ProjectGuid>
+        <ProjectHome>.</ProjectHome>
+        <ProjectView>ShowAllFiles</ProjectView>
+        <StartupFile />
+        <WorkingDirectory>.</WorkingDirectory>
+        <OutputPath>.</OutputPath>
+        <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+        <EnableTypeScript>true</EnableTypeScript>
+        <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">16.0</VisualStudioVersion>
+        <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+    <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+    <ItemGroup>
+        <Content Include="package-lock.json" />
+        <Content Include="package.json" />
+        <None Include="tsconfig.json" />
+        <Content Include="README.md" />
+        <Content Include="public\index.html" />
+        <Content Include="public\favicon.ico" />
+        <Content Include="public\manifest.json" />
+        <None Include="src\react-app-env.d.ts" />
+        <None Include="src\serviceWorker.ts" />
+        <None Include="src\index.tsx" />
+        <Content Include="public\assets\logo.png" />
+        <Content Include="public\assets\placeholder.png" />
+        <Content Include="public\assets\user.png" />
+        <Content Include="public\assets\categoryImages\culture.jpg" />
+        <Content Include="public\assets\categoryImages\drinks.jpg" />
+        <Content Include="public\assets\categoryImages\film.jpg" />
+        <Content Include="public\assets\categoryImages\food.jpg" />
+        <Content Include="public\assets\categoryImages\music.jpg" />
+        <Content Include="public\assets\categoryImages\travel.jpg" />
+        <None Include="src\app\api\agent.ts" />
+        <Content Include="src\app\layout\styles.css" />
+        <None Include="src\app\layout\App.tsx" />
+        <None Include="src\app\layout\LoadingComponent.tsx" />
+        <None Include="src\app\layout\ScrollToTop.tsx" />
+        <None Include="src\app\models\activity.ts" />
+        <None Include="src\app\stores\activityStore.ts" />
+        <None Include="src\features\home\HomePage.tsx" />
+        <None Include="src\features\nav\NavBar.tsx" />
+        <None Include="src\features\activities\dashboard\ActivityDashboard.tsx" />
+        <None Include="src\features\activities\dashboard\ActivityList.tsx" />
+        <None Include="src\features\activities\dashboard\ActivityListItem.tsx" />
+        <None Include="src\features\activities\details\ActivityDetailedChat.tsx" />
+        <None Include="src\features\activities\details\ActivityDetailedHeader.tsx" />
+        <None Include="src\features\activities\details\ActivityDetailedInfo.tsx" />
+        <None Include="src\features\activities\details\ActivityDetailedSidebar.tsx" />
+        <None Include="src\features\activities\details\ActivityDetails.tsx" />
+        <None Include="src\features\activities\form\ActivityForm.tsx" />
+    </ItemGroup>
+    <ItemGroup>
+        <Folder Include="public" />
+        <Folder Include="public\assets" />
+        <Folder Include="public\assets\categoryImages" />
+        <Folder Include="src" />
+        <Folder Include="src\app" />
+        <Folder Include="src\app\api" />
+        <Folder Include="src\app\layout" />
+        <Folder Include="src\app\models" />
+        <Folder Include="src\app\stores" />
+        <Folder Include="src\features" />
+        <Folder Include="src\features\activities" />
+        <Folder Include="src\features\activities\dashboard" />
+        <Folder Include="src\features\activities\details" />
+        <Folder Include="src\features\activities\form" />
+        <Folder Include="src\features\home" />
+        <Folder Include="src\features\nav" />
+        <Folder Include="VideoClientApp" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
+    <ProjectExtensions>
+        <VisualStudio>
+          <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+            <WebProjectProperties>
+              <UseIIS>False</UseIIS>
+              <AutoAssignPort>True</AutoAssignPort>
+              <DevelopmentServerPort>0</DevelopmentServerPort>
+              <DevelopmentServerVPath>/</DevelopmentServerVPath>
+              <IISUrl>http://localhost:48022/</IISUrl>
+              <NTLMAuthentication>False</NTLMAuthentication>
+              <UseCustomServer>True</UseCustomServer>
+              <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+              <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+            </WebProjectProperties>
+          </FlavorProperties>
+          <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+            <WebProjectProperties>
+              <StartPageUrl>
+              </StartPageUrl>
+              <StartAction>CurrentPage</StartAction>
+              <AspNetDebugging>True</AspNetDebugging>
+              <SilverlightDebugging>False</SilverlightDebugging>
+              <NativeDebugging>False</NativeDebugging>
+              <SQLDebugging>False</SQLDebugging>
+              <ExternalProgram>
+              </ExternalProgram>
+              <StartExternalURL>
+              </StartExternalURL>
+              <StartCmdLineArguments>
+              </StartCmdLineArguments>
+              <StartWorkingDirectory>
+              </StartWorkingDirectory>
+              <EnableENC>False</EnableENC>
+              <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+            </WebProjectProperties>
+          </FlavorProperties>
+        </VisualStudio>
+    </ProjectExtensions>
+</Project>

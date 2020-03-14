@@ -64,7 +64,20 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="public\" />
+    <Folder Include="public\asserts\" />
+    <Folder Include="public\asserts\categoryImages\" />
     <Folder Include="src\" />
+    <Folder Include="src\app\" />
+    <Folder Include="src\app\api\" />
+    <Folder Include="src\app\layout\" />
+    <Folder Include="src\app\stores\" />
+    <Folder Include="src\feature\" />
+    <Folder Include="src\feature\activities\" />
+    <Folder Include="src\feature\activities\dashboard\" />
+    <Folder Include="src\feature\activities\Details\" />
+    <Folder Include="src\feature\activities\Form\" />
+    <Folder Include="src\feature\home\" />
+    <Folder Include="src\feature\nav\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="src\index.tsx" />
