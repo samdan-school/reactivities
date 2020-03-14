@@ -1,6 +1,6 @@
-import { observable, action, computed, configure, runInAction } from 'mobx';
-import { createContext, SyntheticEvent } from 'react';
-import { IActivity } from '../models/activity';
+import {action, computed, configure, observable, runInAction} from 'mobx';
+import {createContext, SyntheticEvent} from 'react';
+import {IActivity} from '../models/activity';
 import agent from '../api/agent';
 
 configure({enforceActions: 'always'});
