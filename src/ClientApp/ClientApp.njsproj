@@ -27,6 +27,7 @@
     <Content Include="src\app\stores\modalStore.ts" />
     <Content Include="src\app\stores\rootStore.ts" />
     <Content Include="src\app\stores\userStore.ts" />
+    <Content Include="src\features\activities\dashboard\ActivitiesListItemAttendees.tsx" />
     <Content Include="src\features\user\LoginForm.tsx" />
     <Content Include="src\features\user\RegisterForm.tsx" />
     <None Include="tsconfig.json" />
@@ -85,7 +86,6 @@
     <Folder Include="src\app\common\util" />
     <Folder Include="src\app\layout" />
     <Folder Include="src\features\activities" />
-    <Folder Include="src\features\activities\dashboard" />
     <Folder Include="src\features\activities\details" />
     <Folder Include="src\features\activities\form" />
     <Folder Include="src\features\home" />
