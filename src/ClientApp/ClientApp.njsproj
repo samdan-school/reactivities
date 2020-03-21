@@ -22,14 +22,24 @@
     <Content Include="snippets.txt" />
     <Content Include="src\app\common\form\ErrorMessage.tsx" />
     <Content Include="src\app\common\modals\ModalContainer.tsx" />
+    <Content Include="src\app\common\photoUpload\PhotoUploadWidget.tsx" />
+    <Content Include="src\app\common\photoUpload\PhotoWidgetCropper.tsx" />
+    <Content Include="src\app\common\photoUpload\PhotoWidgetDropZone.tsx" />
+    <Content Include="src\app\models\profile.ts" />
     <Content Include="src\app\models\user.ts" />
     <Content Include="src\app\stores\commonStore.ts" />
     <Content Include="src\app\stores\modalStore.ts" />
+    <Content Include="src\app\stores\profileStore.ts" />
     <Content Include="src\app\stores\rootStore.ts" />
     <Content Include="src\app\stores\userStore.ts" />
     <Content Include="src\features\activities\dashboard\ActivitiesListItemAttendees.tsx" />
+    <Content Include="src\features\Profile\ProfileContent.tsx" />
+    <Content Include="src\features\Profile\ProfileHeader.tsx" />
+    <Content Include="src\features\Profile\ProfilePage.tsx" />
+    <Content Include="src\features\Profile\ProfilePhoto.tsx" />
     <Content Include="src\features\user\LoginForm.tsx" />
     <Content Include="src\features\user\RegisterForm.tsx" />
+    <Content Include="typings-custom\react-cropper-d.ts" />
     <None Include="tsconfig.json" />
     <Content Include="README.md" />
     <Content Include="public\index.html" />
@@ -90,7 +100,6 @@
     <Folder Include="src\features\activities\form" />
     <Folder Include="src\features\home" />
     <Folder Include="src\features\nav" />
-    <Folder Include="typings-custom" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />

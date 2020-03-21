@@ -169,7 +169,6 @@ export default class ActivityStore {
   };
 
   @action cancelAttendance = async () => {
-    const attendee = createAttendee(this.rootStore.userStore.user!);
     this.loading = true;
     try {
       await agent.Activities.unattend(this.activity!.id);
