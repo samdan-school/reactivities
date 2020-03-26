@@ -61,6 +61,24 @@ export default class ProfileStore {
     }
   };
 
+  @action updateProfile = async (profile: Partial<IProfile>) => {
+    this.loading = true;
+    try {
+      await agent.Profile.update(profile);
+      runInAction(() => {
+        this.rootStore.userStore.user!.displayName = profile.displayName || this.rootStore.userStore.user!.displayName;
+        this.profile = {...this.profile!, ...profile};
+        this.loading = false;
+      });
+    } catch (e) {
+      console.log(e);
+      toast.error('Problem updating profile');
+      runInAction(() => {
+        this.loading = false;
+      });
+    }
+  };
+
   @action setMainPhoto = async (photo: IPhoto) => {
     this.loading = true;
     if (photo.isMain) return;

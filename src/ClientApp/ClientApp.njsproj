@@ -33,7 +33,9 @@
     <Content Include="src\app\stores\rootStore.ts" />
     <Content Include="src\app\stores\userStore.ts" />
     <Content Include="src\features\activities\dashboard\ActivitiesListItemAttendees.tsx" />
+    <Content Include="src\features\Profile\ProfileAbout.tsx" />
     <Content Include="src\features\Profile\ProfileContent.tsx" />
+    <Content Include="src\features\Profile\ProfileEditForm.tsx" />
     <Content Include="src\features\Profile\ProfileHeader.tsx" />
     <Content Include="src\features\Profile\ProfilePage.tsx" />
     <Content Include="src\features\Profile\ProfilePhoto.tsx" />

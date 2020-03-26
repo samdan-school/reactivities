@@ -2,9 +2,10 @@
 import {Tab, TabPane} from "semantic-ui-react";
 import {observer} from "mobx-react-lite";
 import ProfilePhoto from "./ProfilePhoto";
+import ProfileAbout from "./ProfileAbout";
 
 const panes = [
-  {menuItem: 'About', render: () => <TabPane>About content</TabPane>},
+  {menuItem: 'About', render: () => <ProfileAbout/>},
   {menuItem: 'Photos', render: () => <ProfilePhoto/>},
   {menuItem: 'Activities', render: () => <TabPane>Activities content</TabPane>},
   {menuItem: 'Followers', render: () => <TabPane>Followers content</TabPane>},
@@ -16,8 +17,7 @@ const ProfileContent = () => {
     <Tab
       menu={{fluid: true, vertical: true}}
       menuPosition='right'
-      panes={panes}
-      activeIndex={1}/>
+      panes={panes}/>
   );
 };
 
