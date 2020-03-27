@@ -1,17 +1,17 @@
 ﻿using System;
-using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Application.Comment.Dto;
+using Application.Comments.Dto;
 using Application.Errors;
 using AutoMapper;
+using Domain;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Comment
+namespace Application.Comments
 {
     public class Create
     {
@@ -48,7 +48,7 @@ namespace Application.Comment
 
                 var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == request.Username);
 
-                var commnet = new Domain.Comment
+                var commnet = new Comment
                 {
                     Author = user,
                     Activity = activity,
@@ -59,7 +59,8 @@ namespace Application.Comment
                 activity.Comments.Add(commnet);
 
                 var success = await _context.SaveChangesAsync() > 0;
-                if (success) return _mapper.Map<CommentDto>(commnet);
+                var mapped = _mapper.Map<CommentDto>(commnet);
+                if (success) return mapped;
 
                 throw new NotImplementedException();
             }

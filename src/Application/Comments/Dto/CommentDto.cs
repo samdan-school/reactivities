@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Application.Comment.Dto
+namespace Application.Comments.Dto
 {
     public class CommentDto
     {

@@ -6,6 +6,7 @@ import {history} from '../..';
 import {toast} from 'react-toastify';
 import {RootStore} from "./rootStore";
 import {createAttendee, setActivityProps} from "../common/util/util";
+import {HubConnection, HubConnectionBuilder, LogLevel} from "@aspnet/signalr";
 
 export default class ActivityStore {
   rootStore: RootStore;
@@ -20,6 +21,39 @@ export default class ActivityStore {
   @observable submitting = false;
   @observable target = '';
   @observable loading = false;
+  @observable.ref hubConnection: HubConnection | null = null;
+
+  @action createHubConnection = () => {
+    this.hubConnection = new HubConnectionBuilder()
+      .withUrl('https://localhost:5001/chat', {
+        accessTokenFactory: () => this.rootStore.commonStore.token!
+      })
+      .configureLogging(LogLevel.Information)
+      .build();
+
+    this.hubConnection.start()
+      .then(() => console.log(this.hubConnection!.state))
+      .catch((error) => console.log('Error establishing connection', error));
+
+    this.hubConnection.on('ReceiveComment', comment => {
+      runInAction(() => {
+        this.activity!.comments.push(comment);
+      });
+    });
+  };
+
+  @action stopHubConnection = () => {
+    this.hubConnection!.stop();
+  };
+
+  @action addComment = async (values: any) => {
+    values.activityId = this.activity!.id;
+    try {
+      await this.hubConnection!.invoke('SendComment', values);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   @computed get activitiesByDate() {
     return this.groupActivitiesByDate(Array.from(this.activityRegistry.values()))
@@ -28,7 +62,7 @@ export default class ActivityStore {
   groupActivitiesByDate(activities: IActivity[]) {
     const sortedActivities = activities.sort(
       (a, b) => a.date.getTime() - b.date.getTime()
-    )
+    );
     return Object.entries(sortedActivities.reduce((activities, activity) => {
       const date = activity.date.toISOString().split('T')[0];
       activities[date] = activities[date] ? [...activities[date], activity] : [activity];
@@ -94,6 +128,7 @@ export default class ActivityStore {
       runInAction('create activity', () => {
         const attendee = createAttendee(this.rootStore.userStore.user!);
         activity.attendees = [];
+        activity.comments = [];
         activity.attendees.push({...attendee, isHost: true});
         activity.isHost = true;
         this.activityRegistry.set(activity.id, activity);

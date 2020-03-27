@@ -1,7 +1,10 @@
 using System.Text;
+using System.Threading.Tasks;
 using API.Middleware;
+using API.SignalR;
 using Application.Activities;
 using Application.Interfaces;
+using Application.Profile;
 using AutoMapper;
 using Domain;
 using FluentValidation.AspNetCore;
@@ -19,6 +22,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Persistence;
 
@@ -48,11 +52,13 @@ namespace API
                     policy
                         .AllowAnyHeader()
                         .AllowAnyMethod()
-                        .WithOrigins("http://localhost:3000");
+                        .WithOrigins("http://localhost:3000")
+                        .AllowCredentials();
                 });
             });
             services.AddMediatR(typeof(List.Handler).Assembly);
             services.AddAutoMapper(typeof(List.Handler).Assembly);
+            services.AddSignalR();
             services
                 .AddControllers(opt =>
                 {
@@ -87,11 +93,26 @@ namespace API
                         ValidateAudience = false,
                         ValidateIssuer = false
                     };
+                    opt.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = context =>
+                        {
+                            var accessToken = context.Request.Query["access_token"];
+                            var path = context.HttpContext.Request.Path;
+                            if (!string.IsNullOrEmpty(accessToken) && (path.StartsWithSegments("/chat")))
+                            {
+                                context.Token = accessToken;
+                            }
+
+                            return Task.CompletedTask;
+                        }
+                    };
                 });
 
             services.AddScoped<IJwtGenerator, JwtGenerator>();
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<IPhotoAccessor, PhotoAccessor>();
+            services.AddScoped<IProfileReader, ProfileReader>();
             // user-secrets
             services.Configure<CloudinarySettings>(Configuration.GetSection("Cloudinary"));
         }
@@ -113,6 +134,7 @@ namespace API
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseSignalR(routes => { routes.MapHub<ChatHub>("/chat"); });
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }

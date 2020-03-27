@@ -34,8 +34,10 @@
     <Content Include="src\app\stores\userStore.ts" />
     <Content Include="src\features\activities\dashboard\ActivitiesListItemAttendees.tsx" />
     <Content Include="src\features\Profile\ProfileAbout.tsx" />
+    <Content Include="src\features\Profile\ProfileCard.tsx" />
     <Content Include="src\features\Profile\ProfileContent.tsx" />
     <Content Include="src\features\Profile\ProfileEditForm.tsx" />
+    <Content Include="src\features\Profile\ProfileFollowings.tsx" />
     <Content Include="src\features\Profile\ProfileHeader.tsx" />
     <Content Include="src\features\Profile\ProfilePage.tsx" />
     <Content Include="src\features\Profile\ProfilePhoto.tsx" />
@@ -94,14 +96,25 @@
     <Folder Include="src" />
     <Folder Include="src\app" />
     <Folder Include="src\app\api" />
+    <Folder Include="src\app\common\" />
+    <Folder Include="src\app\common\form\" />
+    <Folder Include="src\app\common\modals\" />
     <Folder Include="src\app\common\options" />
+    <Folder Include="src\app\common\photoUpload\" />
     <Folder Include="src\app\common\util" />
     <Folder Include="src\app\layout" />
+    <Folder Include="src\app\models\" />
+    <Folder Include="src\app\stores\" />
+    <Folder Include="src\features\" />
     <Folder Include="src\features\activities" />
+    <Folder Include="src\features\activities\dashboard\" />
     <Folder Include="src\features\activities\details" />
     <Folder Include="src\features\activities\form" />
     <Folder Include="src\features\home" />
     <Folder Include="src\features\nav" />
+    <Folder Include="src\features\Profile\" />
+    <Folder Include="src\features\user\" />
+    <Folder Include="typings-custom\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
